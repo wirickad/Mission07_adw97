@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mission06_adw97.Models
 {
+    //This is the database context class, when the database model is created, it comes here to insert the records below called 'seeding'
     public class MovieContext : DbContext
     {
         //Constructor
@@ -15,7 +16,7 @@ namespace Mission06_adw97.Models
         }
 
         public DbSet<Movie> Movies { get; set; } 
-
+        
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<Movie>().HasData(

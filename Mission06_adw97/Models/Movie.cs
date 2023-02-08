@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mission06_adw97.Models
 {
+    //This is the main Movie class, it contains the attributes pertaining to Movie objects. This is how the database table is set up
     public class Movie
     {
         [Key]
