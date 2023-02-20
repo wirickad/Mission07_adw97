@@ -15,15 +15,55 @@ namespace Mission06_adw97.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("Mission06_adw97.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Romance"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Horror"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Drama"
+                        });
+                });
+
             modelBuilder.Entity("Mission06_adw97.Models.Movie", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -52,13 +92,15 @@ namespace Mission06_adw97.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Movies");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Action",
+                            CategoryId = 1,
                             Director = "Ben Affleck",
                             Edited = true,
                             Rating = "R",
@@ -68,7 +110,7 @@ namespace Mission06_adw97.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Action",
+                            CategoryId = 1,
                             Director = "Christopher Nolan",
                             Edited = false,
                             Rating = "PG-13",
@@ -78,13 +120,22 @@ namespace Mission06_adw97.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Comedy",
+                            CategoryId = 2,
                             Director = "Akiva Schaffer",
                             Edited = false,
                             Rating = "PG-13",
                             Title = "Hot Rod",
                             Year = (short)2007
                         });
+                });
+
+            modelBuilder.Entity("Mission06_adw97.Models.Movie", b =>
+                {
+                    b.HasOne("Mission06_adw97.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

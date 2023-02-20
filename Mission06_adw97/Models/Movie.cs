@@ -10,10 +10,14 @@ namespace Mission06_adw97.Models
     public class Movie
     {
         [Key]
+        [Required]
         public int MovieId { get; set; }
-        
+
+        //This is to build the FK relationship between category and movie
         [Required(ErrorMessage = "Category is required.")]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+
 
         [Required(ErrorMessage = "Title is required.")]
         public string Title { get; set; }

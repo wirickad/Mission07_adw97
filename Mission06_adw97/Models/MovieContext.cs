@@ -15,15 +15,45 @@ namespace Mission06_adw97.Models
             
         }
 
-        public DbSet<Movie> Movies { get; set; } 
-        
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder mb)
         {
+            //Seeding data
+            mb.Entity<Category>().HasData(
+                new Category
+                {
+                    CategoryId = 1,
+                    CategoryName = "Action"
+                }, 
+                new Category
+                {
+                    CategoryId = 2,
+                    CategoryName = "Comedy"
+                },
+                new Category
+                {
+                    CategoryId = 3,
+                    CategoryName = "Romance"
+                },
+                new Category
+                {
+                    CategoryId = 4,
+                    CategoryName = "Horror"
+                },
+                new Category
+                {
+                    CategoryId = 5,
+                    CategoryName = "Drama"
+                }
+
+            );
+
             mb.Entity<Movie>().HasData(
                 new Movie
                 {
                     MovieId = 1,
-                    Category = "Action",
+                    CategoryId = 1,
                     Title = "The Town",
                     Year = 2010,
                     Director = "Ben Affleck",
@@ -36,7 +66,7 @@ namespace Mission06_adw97.Models
                 new Movie
                 {
                     MovieId = 2,
-                    Category = "Action",
+                    CategoryId = 1,
                     Title = "The Dark Knight",
                     Year = 2008,
                     Director = "Christopher Nolan",
@@ -49,7 +79,7 @@ namespace Mission06_adw97.Models
                 new Movie
                 {
                     MovieId = 3,
-                    Category = "Comedy",
+                    CategoryId = 2,
                     Title = "Hot Rod",
                     Year = 2007,
                     Director = "Akiva Schaffer",
@@ -59,6 +89,7 @@ namespace Mission06_adw97.Models
                     Notes = null
                 }
             );
+
         }
     }
 }
